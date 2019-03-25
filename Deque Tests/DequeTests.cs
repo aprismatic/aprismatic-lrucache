@@ -8,7 +8,7 @@ public class DequeTests
     private readonly Random _rnd = new Random();
     private const int iterations = 10;
 
-    [Fact]
+    [Fact(DisplayName = "Constructors")]
     public void Constructors()
     {
         // setup & act
@@ -18,7 +18,7 @@ public class DequeTests
         Assert.Equal(0, deque.Count);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Push Head")]
     public void PushHead()
     {
         // setup
@@ -43,7 +43,7 @@ public class DequeTests
         Assert.True(DequeQueueWereEqual(deque,queue));
     }
 
-    [Fact]
+    [Fact(DisplayName = "Detach Tail")]
     public void DetachTail()
     {
         // setup
@@ -74,7 +74,7 @@ public class DequeTests
         Assert.Throws<ApplicationException>(() => deque.DetachTail());
     }
 
-    [Fact]
+    [Fact(DisplayName = "Bubble")]
     public void Bubble()
     {
         /*{ // BUBBLE THE HEAD

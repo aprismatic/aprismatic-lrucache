@@ -12,7 +12,7 @@ namespace Aprismatic.Cache
         private int _size;
         private Func<K, V> _eval;
 
-        private BlockingCollection<(bool,DequeElem<(K, V)>)> _processingQ;
+        private BlockingCollection<(bool, DequeElem<(K, V)>)> _processingQ;
         private Thread _processingThread;
 
 
@@ -38,17 +38,15 @@ namespace Aprismatic.Cache
 
         public V Get(K key, out bool hit)
         {
-            var tmpHit = true;
-            var newElem = _dict.GetOrAdd(key, k =>
+            hit = _dict.TryGetValue(key, out var newElem);
+            if (!hit)
             {
-                tmpHit = false;
-                return new DequeElem<(K, V)>((k, _eval(k)));
-            });
+                newElem = new DequeElem<(K, V)>((key, _eval(key)));
+            }
 
-            hit = tmpHit;
             var result = newElem.item.Item2;
 
-            _processingQ.Add((tmpHit, newElem));
+            _processingQ.Add( (hit, newElem) );
 
             return result;
         }
@@ -65,13 +63,33 @@ namespace Aprismatic.Cache
             {
                 (hit, elem) = _processingQ.Take(); // sleeps if internal queue is empty
 
-                if (hit) // retrieved from cache
+                if (hit) // retrieved from cache at the time of Get
                 {
-                    _deque.Bubble(elem);
-                    continue;
-                }
+                    if (_dict.TryGetValue(elem.item.Item1, out var actualElem)) // check if it is still there
+                    {
+                        _deque.Bubble(actualElem);
+                        continue;
+                    }
 
-                _deque.PushHead(elem); // new element
+                    // if we are here, element was removed by the processing thread since it was retrieved in Get
+                    if (_dict.TryAdd(elem.item.Item1, elem))
+                    {
+                        _deque.PushHead(elem); // new element
+                    }
+                    // else - something went wrong, best course of action - just carry on
+                }
+                else
+                {
+                    if (_dict.TryAdd(elem.item.Item1, elem))
+                    {
+                        _deque.PushHead(elem); // new element
+                    }
+                    else // cache missed but this element was in queue for processing and since then was added
+                    {
+                        _dict.TryGetValue(elem.item.Item1, out elem);
+                        _deque.Bubble(elem);
+                    }
+                }
 
                 if (_deque.Count > _size) // trim cache
                 {

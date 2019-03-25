@@ -2,9 +2,8 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading;
 
-[assembly: InternalsVisibleTo("AprismaticCacheTests")]
+[assembly: InternalsVisibleTo("Deque Tests")]
 
 namespace Aprismatic.Cache
 {

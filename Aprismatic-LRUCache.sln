@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aprismatic-LRUCache", "Aprismatic-Cache\Aprismatic-LRUCache.csproj", "{C6A81046-2D01-49EE-B9A1-9173838C3D34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aprismatic-LRUCache", "Aprismatic-LRUCache\Aprismatic-LRUCache.csproj", "{C6A81046-2D01-49EE-B9A1-9173838C3D34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprismaticCacheTests", "DequeTests\AprismaticCacheTests.csproj", "{EC908187-6CCC-4BBC-BA72-62F806B99DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deque Tests", "Deque Tests\Deque Tests.csproj", "{EC908187-6CCC-4BBC-BA72-62F806B99DB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cache Tests", "Cache Tests\Cache Tests.csproj", "{07BCE07C-CE0E-4C08-B9C1-F396C7C16484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EC908187-6CCC-4BBC-BA72-62F806B99DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC908187-6CCC-4BBC-BA72-62F806B99DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC908187-6CCC-4BBC-BA72-62F806B99DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07BCE07C-CE0E-4C08-B9C1-F396C7C16484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07BCE07C-CE0E-4C08-B9C1-F396C7C16484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07BCE07C-CE0E-4C08-B9C1-F396C7C16484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07BCE07C-CE0E-4C08-B9C1-F396C7C16484}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
